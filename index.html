@@ -8,7 +8,21 @@
 <body>
   <h2>WOL</h2>
   <form action="" method="post">
-    <button name="foo" value="send">Power Up</button>
+  <p id="status"></p>
+  <button value="send">Power Up</button>
 </form>
+<script>
+  const fetchData = fetch('/power/ping/')
+                .then(response => response.json())
+            
+            fetchData.then(data => {
+              var p = document.getElementById('status');
+              p.innerHTML = 'Status: ' + (data.status ? 'up' : 'down');  
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              p.innerHTML = 'Status: error';  
+            });
+</script>
 </body>
 </html>
