@@ -16,10 +16,10 @@ app.get('/power', function(req, res) {
 app.post('/power', function(req, res) {
     exec('wakeonlan -i 192.168.0.255 -p 7 40:61:86:c8:ca:b2', function(err, stdout, stderr) {
         if (err || stderr.includes('Error')) {
-            res.send('Error');
+            res.json({error: true});
             console.log(stderr);
         } else {
-            res.send('Magic packet sent.');
+          res.json({error: false});
         }
     });
 });
