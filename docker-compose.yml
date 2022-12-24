@@ -1,0 +1,9 @@
+version: '3'
+services:
+  wol_web: 
+    image: wol-web
+    network_mode: host
+    command: sh -c "node index.js"
+    restart: always
+    volumes:
+      - ./config.json:/app/config.json
