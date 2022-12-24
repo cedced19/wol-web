@@ -4,6 +4,7 @@ var exec = require('child_process').exec;
 var path = require('path');
 const port = 9080;
 var ping = require('ping');
+var config = require('./config.json');
 
 app.get('/', function(req, res) {
   res.send('Hello World WOL WEB');
@@ -14,7 +15,7 @@ app.get('/power', function(req, res) {
 });
 
 app.post('/power', function(req, res) {
-    exec('wakeonlan -i 192.168.0.255 -p 7 40:61:86:c8:ca:b2', function(err, stdout, stderr) {
+    exec(`wakeonlan -i ${config.broadcast_ip} -p 7 ${config.command_mac}`, function(err, stdout, stderr) {
         if (err || stderr.includes('Error')) {
             res.json({error: true});
             console.log(stderr);
@@ -25,7 +26,7 @@ app.post('/power', function(req, res) {
 });
 
 app.get('/power/ping', function(req, res) {
-  ping.sys.probe('192.168.0.62', function(isAlive){
+  ping.sys.probe(config.command_ip, function(isAlive){
     res.json({status: isAlive ? true : false });
   });
 });
