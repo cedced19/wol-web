@@ -22,11 +22,11 @@
                 .then(response => response.json())
             
             fetchData.then(data => {
-              p.innerHTML = 'Status: ' + (data.status ? 'up' : 'down');  
+              p.innerHTML = 'Status: ' + (data.status ? 'Up' : 'Down');  
             })
             .catch(error => {
               console.error('Error:', error);
-              p.innerHTML = 'Status: error';  
+              p.innerHTML = 'Status: Error';  
             });
   }
   document.getElementById('status-form').addEventListener('submit', function(e) {
