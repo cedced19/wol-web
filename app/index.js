@@ -6,6 +6,9 @@ const port = 9080;
 var ping = require('ping');
 var config = require('./config.json');
 
+// Add middleware to parse JSON bodies
+app.use(express.json());
+
 app.get('/', function(req, res) {
   res.send('Hello World WOL WEB');
 });
@@ -15,6 +18,11 @@ app.get('/power', function(req, res) {
 });
 
 app.post('/power', function(req, res) {
+    // Check if password is provided and correct
+    if (!req.body.password || req.body.password !== config.password) {
+        return res.status(401).json({error: true, message: 'Invalid password'});
+    }
+    
     exec(`wakeonlan -i ${config.broadcast_ip} -p 7 ${config.command_mac}`, function(err, stdout, stderr) {
         if (err || stderr.includes('Error')) {
             res.json({error: true});

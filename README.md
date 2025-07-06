@@ -4,7 +4,6 @@
 node index.js
 ```
 
-
 ## Docker
 
 Build docker image:

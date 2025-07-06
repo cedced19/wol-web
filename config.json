@@ -1,5 +1,6 @@
 {
     "broadcast_ip": "192.168.0.255",
     "command_ip": "192.168.0.62",
-    "command_mac": "40:61:86:c8:ca:b2"
+    "command_mac": "40:61:86:c8:ca:b2",
+    "password": "password"
 }
